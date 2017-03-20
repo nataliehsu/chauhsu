@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 /**
  * Created by eileen_chau on 3/16/17.
@@ -14,10 +15,14 @@ public class Main extends JPanel{
     private World theWorld;
     private Timer timer;
     private boolean[] keys;
+    private ArrayList<Aliens> aliens;
+    private Spaceship spaceShip;
 
     public Main() {
         setSize(FRAMEWIDTH, FRAMEHEIGHT);
         theWorld = new World(FRAMEWIDTH, FRAMEHEIGHT);
+        aliens = new ArrayList<Aliens>();
+        spaceShip = new Spaceship(100, 100, 270);
         Missle m = new Missle(50, 50, 90, theWorld);
 
         timer = new Timer(40, new ActionListener() {
