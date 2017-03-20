@@ -16,7 +16,7 @@ public class Missle extends Sprite{
         target = sprites.get((int)(Math.random() * sprites.size()));
     }
 
-    setPic("Tarantula.png", NORTH);
+    setPic("Tarantula.png ", NORTH);
     setSpeed(8);
 }
 
