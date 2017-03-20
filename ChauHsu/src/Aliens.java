@@ -4,5 +4,6 @@
 public class Aliens extends Sprite {
     public Aliens(int x, int y, int dir){
         super(x, y, dir);
+        setPic("alien.png", EAST);
     }
 }
