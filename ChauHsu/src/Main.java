@@ -16,20 +16,28 @@ public class Main extends JPanel{
     private Timer timer;
     private boolean[] keys;
     private ArrayList<Aliens> aliens;
+    private ArrayList<Missle> missles;
     private Spaceship spaceShip;
 
     public Main() {
         setSize(FRAMEWIDTH, FRAMEHEIGHT);
         theWorld = new World(FRAMEWIDTH, FRAMEHEIGHT);
         aliens = new ArrayList<Aliens>();
-        spaceShip = new Spaceship(100, 100, 270);
-        Missle m = new Missle(50, 50, 90, theWorld);
+        missles = new ArrayList<Missle>();
+        spaceShip = new Spaceship(100, 100, 270, theWorld);
 
         timer = new Timer(40, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
 
-                //move the frog
+                for (Aliens s: aliens){
+                    s.update();
+                }
+                for(Missle m: missles){
+                    m.update();
+                }
+                spaceShip.update();
+
                 if(keys[KeyEvent.VK_W]){
                     keys[KeyEvent.VK_W] = false; //probably.
                 }
@@ -72,6 +80,13 @@ public class Main extends JPanel{
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
+        for (Aliens s: aliens){
+            s.draw(g2);
+        }
+        for(Missle m: missles){
+            m.draw(g2);
+        }
+        spaceShip.draw(g2);
 
     }
 
