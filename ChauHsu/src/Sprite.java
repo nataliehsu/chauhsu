@@ -24,7 +24,7 @@ public class Sprite {
     public Sprite(int x, int y, int direction) {
         loc = new Point(x, y);
         dir = direction;
-        setPic("blank.png", NORTH);
+        setPic("alien.png", NORTH);
         speed = 5;
         id = nextID;
         nextID++;
@@ -33,7 +33,7 @@ public class Sprite {
     public Sprite(int x, int y, int direction, World world) {
         loc = new Point(x, y);
         dir = direction;
-        setPic("blank.png", NORTH);
+        setPic("alien.png", NORTH);
         myWorld = world;
         speed = 5;
 

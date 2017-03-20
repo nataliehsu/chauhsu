@@ -18,10 +18,14 @@ public class Main extends JPanel{
     private ArrayList<Aliens> aliens;
     private ArrayList<Missle> missles;
     private Spaceship spaceShip;
+    private int count;
+    private int maxCount;
 
     public Main() {
         setSize(FRAMEWIDTH, FRAMEHEIGHT);
         theWorld = new World(FRAMEWIDTH, FRAMEHEIGHT);
+        count = 0;
+        maxCount = 100;
         aliens = new ArrayList<Aliens>();
         missles = new ArrayList<Missle>();
         spaceShip = new Spaceship(100, 100, 270, theWorld);
@@ -30,6 +34,11 @@ public class Main extends JPanel{
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
 
+                if(count >= 100){
+                    int randX = (int)(Math.random()*FRAMEWIDTH) - 50;
+                    int randY = (int)(Math.random()*FRAMEHEIGHT) - 50;
+                    aliens.add(new Aliens(randX, randY, 90, theWorld));
+                }
                 for (Aliens s: aliens){
                     s.update();
                 }
@@ -37,21 +46,6 @@ public class Main extends JPanel{
                     m.update();
                 }
                 spaceShip.update();
-
-                if(keys[KeyEvent.VK_W]){
-                    keys[KeyEvent.VK_W] = false; //probably.
-                }
-                if(keys[KeyEvent.VK_A]){
-                    keys[KeyEvent.VK_A] = false; //probably.
-                }
-                if(keys[KeyEvent.VK_D]){
-                    keys[KeyEvent.VK_D] = false; //probably.
-                }
-                if(keys[KeyEvent.VK_S]){
-                    keys[KeyEvent.VK_S] = false;
-                }
-                if(keys[KeyEvent.VK_R]){
-                }
 
                 repaint();
             }
@@ -61,16 +55,18 @@ public class Main extends JPanel{
         addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent keyEvent) {
+                int code = keyEvent.getKeyChar();
+                if(code == 'r'){
+                    //restart
+                }
             }
 
             @Override
             public void keyPressed(KeyEvent keyEvent) {
-                keys[keyEvent.getKeyCode()] = true;
             }
 
             @Override
             public void keyReleased(KeyEvent keyEvent) {
-                keys[keyEvent.getKeyCode()] = false;
             }
         });
 
