@@ -4,6 +4,7 @@
 public class Spaceship extends Sprite {
     public Spaceship(int x, int y, int dir){
         super(x, y, dir);
+        setPic("spaceship.png", EAST);
         setSpeed(8);
     }
 }
