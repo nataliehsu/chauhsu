@@ -4,11 +4,14 @@ import javax.swing.*;
  * Created by eileen_chau on 3/16/17.
  */
 public class Main extends JPanel{
+
     public static final int FRAMEWIDTH = 1000, FRAMEHEIGHT = 600;
+    private World theWorld;
 
     public Main() {
         setSize(FRAMEWIDTH, FRAMEHEIGHT);
-        Missle m = new Missle(50, 50, 90);
+        theWorld = new World(FRAMEWIDTH, FRAMEHEIGHT);
+        Missle m = new Missle(50, 50, 90, theWorld);
     }
 
     public static void main(String[] args) {
