@@ -7,18 +7,16 @@ public class Missle extends Sprite{
 
     private Sprite target;
 
-    public Missle(int x, int y, int dir, World world){
+    public Missle(int x, int y, int dir, World world) {
         super(x, y, dir, world);
-
-    ArrayList<Sprite> sprites = world.getAllSprites();
-    target = sprites.get((int)(Math.random() * sprites.size()));
-        while(target.equals(this) && sprites.size()>1){
-        target = sprites.get((int)(Math.random() * sprites.size()));
+        setPic("missile.png", NORTH);
+        setSpeed(5);
+        ArrayList<Sprite> sprites = world.getAllSprites();
+        target = sprites.get((int) (Math.random() * sprites.size()));
+        while (target.equals(this) && sprites.size() > 1) {
+            target = sprites.get((int) (Math.random() * sprites.size()));
+        }
     }
-
-    setPic("missile.png", NORTH);
-    setSpeed(8);
-}
 
     @Override
     public void update(){
