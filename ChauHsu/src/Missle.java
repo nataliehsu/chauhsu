@@ -22,10 +22,17 @@ public class Missle extends Sprite{
 
     @Override
     public void update(){
+        super.update();
         int d = getWorld().getDirection(this.getLoc(), target.getLoc());
         setDir(d);
-
-        super.update();
+        if(!getTarget().equals(this) && getTarget().intersects(this)){
+            getWorld().removeSprite(getTarget());
+            ArrayList<Sprite> sprites = getWorld().getAllSprites();
+            setTarget(sprites.get((int)(Math.random() * sprites.size())));
+            while(getTarget().equals(this) && sprites.size()>1){
+                setTarget(sprites.get((int)(Math.random() * sprites.size())));
+            }
+        }
     }
 
     public Sprite getTarget(){
