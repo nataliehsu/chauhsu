@@ -16,7 +16,7 @@ public class Main extends JPanel{
     private Timer timer;
     private boolean[] keys;
     private ArrayList<Aliens> aliens;
-    private ArrayList<Missle> missles;
+    private ArrayList<Missile> missiles;
     private Spaceship spaceShip;
     private int count;
     private int maxCount;
@@ -27,14 +27,14 @@ public class Main extends JPanel{
         count = 0;
         maxCount = 100;
         aliens = new ArrayList<Aliens>();
-        missles = new ArrayList<Missle>();
+        missiles = new ArrayList<Missile>();
         spaceShip = new Spaceship(100, 100, 270, theWorld);
 
         timer = new Timer(40, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
 
-                if(count >= 100){
+                if(count >= maxCount){
                     int randX = (int)(Math.random()*FRAMEWIDTH) - 50;
                     int randY = (int)(Math.random()*FRAMEHEIGHT) - 50;
                     aliens.add(new Aliens(randX, randY, 90, theWorld));
@@ -42,7 +42,7 @@ public class Main extends JPanel{
                 for (Aliens s: aliens){
                     s.update();
                 }
-                for(Missle m: missles){
+                for(Missile m: missiles){
                     m.update();
                 }
                 spaceShip.update();
@@ -79,7 +79,7 @@ public class Main extends JPanel{
         for (Aliens s: aliens){
             s.draw(g2);
         }
-        for(Missle m: missles){
+        for(Missile m: missiles){
             m.draw(g2);
         }
         spaceShip.draw(g2);

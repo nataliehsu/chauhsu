@@ -3,11 +3,11 @@ import java.util.ArrayList;
 /**
  * Created by natalie_hsu on 3/16/17.
  */
-public class Missle extends Sprite{
+public class Missile extends Sprite{
 
     private Sprite target;
 
-    public Missle(int x, int y, int dir, World world) {
+    public Missile(int x, int y, int dir, World world) {
         super(x, y, dir, world);
         setPic("missile.png", NORTH);
         setSpeed(5);
