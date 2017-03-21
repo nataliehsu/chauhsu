@@ -33,7 +33,6 @@ public class Main extends JPanel{
         timer = new Timer(40, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-
                 if(count >= maxCount){
                     int randX = (int)(Math.random()*FRAMEWIDTH) - 50;
                     int randY = (int)(Math.random()*FRAMEHEIGHT) - 50;
@@ -76,6 +75,7 @@ public class Main extends JPanel{
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
+
         for (Aliens s: aliens){
             s.draw(g2);
         }
