@@ -37,6 +37,7 @@ public class Main extends JPanel{
                     aliens.add(new Aliens(randX, randY, 90, theWorld));
                     missiles.add(new Missile(randX, randY, 90, theWorld));
                     count = 0;
+                    count = 10;
                 }
                 for (Aliens s: aliens){
                     s.update();
@@ -94,7 +95,6 @@ public class Main extends JPanel{
             m.draw(g2);
         }
         spaceShip.draw(g2);
-
 
     }
 
