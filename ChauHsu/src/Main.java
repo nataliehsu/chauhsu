@@ -17,12 +17,16 @@ public class Main extends JPanel{
     private Spaceship spaceShip;
     private int count;
     private int maxCount;
+    private int countM;
+    private int maxM;
 
     public Main() {
         setSize(FRAMEWIDTH, FRAMEHEIGHT);
         theWorld = new World(FRAMEWIDTH, FRAMEHEIGHT);
         count = 0;
         maxCount = 100;
+        countM = 0;
+        maxM = 50;
         aliens = new ArrayList<Aliens>();
         missiles = new ArrayList<Missile>();
         spaceShip = new Spaceship(100, 100, 90, theWorld);
@@ -31,28 +35,24 @@ public class Main extends JPanel{
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 count++;
-                if(count == maxCount){
-                    int randX = (int)(Math.random()*FRAMEWIDTH) - 50;
-                    int randY = (int)(Math.random()*FRAMEHEIGHT) - 50;
+                int randX = (int)(Math.random()*(FRAMEWIDTH - 100)) + 50;
+                int randY = (int)(Math.random()*(FRAMEHEIGHT - 100)) + 50;
+                if(count >= maxCount){
                     aliens.add(new Aliens(randX, randY, 90, theWorld));
-                    missiles.add(new Missile(randX, randY, 90, theWorld));
                     count = 0;
                 }
+                countM++;
+                if(countM >= maxM && aliens.size() > 0){
+                    int i = (int)(Math.random() * aliens.size());
+                    Sprite s = aliens.get(i);
+                    missiles.add(new Missile(s.getLoc().x, s.getLoc().y, 90, theWorld));
+                    countM = 0;
+                }
                 for (Aliens s: aliens){
-                    for (Missile m : missiles) {
-                        s.update();
-                        m.update();
-                        if(m.intersects(spaceShip) && count > 120){
-                            Point p = new Point(100, 100);
-                            spaceShip.setLoc(p);
-                        }
-                        else if(m.intersects(s) && count > 120){
-                            for (int i = 0; i < aliens.size(); i++) {
-                                aliens.remove(i);
-                                i--;
-                            }
-                        }
-                    }
+                    s.update();
+                }
+                for(Missile m: missiles){
+                    m.update();
                 }
 
                 repaint();
