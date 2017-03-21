@@ -11,27 +11,27 @@ public class Missile extends Sprite{
         super(x, y, dir, world);
         setPic("missile.png", NORTH);
         setSpeed(5);
-        ArrayList<Sprite> sprites = world.getAllSprites();
-        target = sprites.get((int) (Math.random() * sprites.size()));
-        while (target.equals(this) && sprites.size() > 1) {
-            target = sprites.get((int) (Math.random() * sprites.size()));
-        }
+//        ArrayList<Sprite> sprites = world.getAllSprites();
+//        target = sprites.get((int) (Math.random() * sprites.size()));
+//        while (target.equals(this) && sprites.size() > 1) {
+//            target = sprites.get((int) (Math.random() * sprites.size()));
+//        }
     }
 
-    @Override
-    public void update(){
-        super.update();
-        int d = getWorld().getDirection(this.getLoc(), target.getLoc());
-        setDir(d);
-        if(!getTarget().equals(this) && getTarget().intersects(this)){
-            getWorld().removeSprite(getTarget());
-            ArrayList<Sprite> sprites = getWorld().getAllSprites();
-            setTarget(sprites.get((int)(Math.random() * sprites.size())));
-            while(getTarget().equals(this) && sprites.size()>1){
-                setTarget(sprites.get((int)(Math.random() * sprites.size())));
-            }
-        }
-    }
+//    @Override
+//    public void update(){
+//        super.update();
+//        int d = getWorld().getDirection(this.getLoc(), target.getLoc());
+//        setDir(d);
+//        if(!getTarget().equals(this) && getTarget().intersects(this)){
+//            getWorld().removeSprite(getTarget());
+//            ArrayList<Sprite> sprites = getWorld().getAllSprites();
+//            setTarget(sprites.get((int)(Math.random() * sprites.size())));
+//            while(getTarget().equals(this) && sprites.size()>1){
+//                setTarget(sprites.get((int)(Math.random() * sprites.size())));
+//            }
+//        }
+//    }
 
     public Sprite getTarget(){
         return target;

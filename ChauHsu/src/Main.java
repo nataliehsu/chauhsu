@@ -1,9 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 
 /**
@@ -28,15 +25,18 @@ public class Main extends JPanel{
         maxCount = 100;
         aliens = new ArrayList<Aliens>();
         missiles = new ArrayList<Missile>();
-        spaceShip = new Spaceship(100, 100, 270, theWorld);
+        spaceShip = new Spaceship(100, 100, 90, theWorld);
 
         timer = new Timer(40, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                if(count >= maxCount){
+                count++;
+                if(count == maxCount){
                     int randX = (int)(Math.random()*FRAMEWIDTH) - 50;
                     int randY = (int)(Math.random()*FRAMEHEIGHT) - 50;
                     aliens.add(new Aliens(randX, randY, 90, theWorld));
+                    missiles.add(new Missile(randX, randY, 90, theWorld));
+                    count = 0;
                 }
                 for (Aliens s: aliens){
                     s.update();
@@ -44,7 +44,6 @@ public class Main extends JPanel{
                 for(Missile m: missiles){
                     m.update();
                 }
-                spaceShip.update();
 
                 repaint();
             }
@@ -66,6 +65,18 @@ public class Main extends JPanel{
 
             @Override
             public void keyReleased(KeyEvent keyEvent) {
+            }
+        });
+
+        addMouseMotionListener(new MouseMotionListener() {
+            @Override
+            public void mouseDragged(MouseEvent mouseEvent) {
+
+            }
+
+            @Override
+            public void mouseMoved(MouseEvent mouseEvent) {
+                spaceShip.setLoc(mouseEvent.getPoint());
             }
         });
 
