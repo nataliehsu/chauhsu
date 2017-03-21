@@ -37,13 +37,22 @@ public class Main extends JPanel{
                     aliens.add(new Aliens(randX, randY, 90, theWorld));
                     missiles.add(new Missile(randX, randY, 90, theWorld));
                     count = 0;
-                    count = 10;
                 }
                 for (Aliens s: aliens){
-                    s.update();
-                }
-                for(Missile m: missiles){
-                    m.update();
+                    for (Missile m : missiles) {
+                        s.update();
+                        m.update();
+                        if(m.intersects(spaceShip) && count > 120){
+                            Point p = new Point(100, 100);
+                            spaceShip.setLoc(p);
+                        }
+                        else if(m.intersects(s) && count > 120){
+                            for (int i = 0; i < aliens.size(); i++) {
+                                aliens.remove(i);
+                                i--;
+                            }
+                        }
+                    }
                 }
 
                 repaint();
