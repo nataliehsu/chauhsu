@@ -95,6 +95,7 @@ public class Main extends JPanel{
         }
         spaceShip.draw(g2);
 
+
     }
 
     public static void main(String[] args) {
