@@ -15,10 +15,7 @@ public class Main extends JPanel{
     private ArrayList<Aliens> aliens;
     private ArrayList<Missile> missiles;
     private Spaceship spaceShip;
-    private int count;
-    private int maxCount;
-    private int countM;
-    private int maxM;
+    private int count, maxCount, countM, maxM, lives, kills;
 
     public Main() {
         setSize(FRAMEWIDTH, FRAMEHEIGHT);
@@ -30,6 +27,8 @@ public class Main extends JPanel{
         aliens = new ArrayList<Aliens>();
         missiles = new ArrayList<Missile>();
         spaceShip = new Spaceship(100, 100, 90, theWorld);
+        lives = 3;
+        kills = 0;
 
         timer = new Timer(40, new ActionListener() {
             @Override
@@ -45,26 +44,24 @@ public class Main extends JPanel{
                 if(countM >= maxM && aliens.size() > 0){
                     int i = (int)(Math.random() * aliens.size());
                     Sprite s = aliens.get(i);
-                    missiles.add(new Missile(s.getLoc().x, s.getLoc().y, 90, theWorld));
+                    missiles.add(new Missile(s.getLoc().x, s.getLoc().y, 90, theWorld, spaceShip));
                     countM = 0;
                 }
-                for (Aliens s: aliens){
+                for (Aliens s: aliens) {
                     for (Missile m : missiles) {
                         s.update();
                         m.update();
-                        if(m.intersects(spaceShip) && count > 120){
+                        if(m.intersects(spaceShip)){
+                            lives--;
                             Point p = new Point(100, 100);
                             spaceShip.setLoc(p);
                         }
-                        else if(m.intersects(s) && count > 120){
-                            for (int i = 0; i < aliens.size(); i++) {
-                                aliens.remove(i);
-                                i--;
-                            }
+                        else if(m.intersects(s)){
+                            kills++;
+                            theWorld.removeSprite(s);
                         }
                     }
                 }
-
                 repaint();
             }
         });
@@ -106,7 +103,6 @@ public class Main extends JPanel{
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
-
         for (Aliens s: aliens){
             s.draw(g2);
         }
@@ -114,6 +110,13 @@ public class Main extends JPanel{
             m.draw(g2);
         }
         spaceShip.draw(g2);
+        g2.setColor(Color.BLACK);
+        g2.fillRect(10, 0, 150, 60);
+        g2.setColor(Color.WHITE);
+        g2.setFont(new Font("Courier", Font.PLAIN, 20));
+        g2.drawString("KILLS: " + kills, 20, 20);
+        g2.setFont(new Font("Courier", Font.PLAIN, 20));
+        g2.drawString("LIVES: " + lives, 20, 40);
 
     }
 
