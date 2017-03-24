@@ -11,6 +11,7 @@ public class Missile extends Sprite{
         super(x, y, dir, world);
         setPic("missile.png", NORTH);
         setSpeed(5);
+        System.out.println(" ");
         ArrayList<Sprite> sprites = world.getAllSprites();
         target = sprites.get((int) (Math.random() * sprites.size()));
         while (target.equals(this) && sprites.size() > 1) {
