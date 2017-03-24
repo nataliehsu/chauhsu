@@ -8,7 +8,7 @@ public class Missile extends Sprite{
     public Missile(int x, int y, int dir, World world, Sprite player) {
         super(x, y, dir, world);
         setPic("missile.png", NORTH);
-        setSpeed(3);
+        setSpeed(5);
         ArrayList<Sprite> sprites = world.getAllSprites();
         target = player;
         while (target.equals(this) && sprites.size() > 1) {

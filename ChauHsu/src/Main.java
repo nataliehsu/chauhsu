@@ -51,12 +51,12 @@ public class Main extends JPanel{
                     countM = 0;
                 }
                 for (int m = 0; m < missiles.size(); m++) {
+                    missiles.get(m).update();
                     for (int i = 0; i < aliens.size(); i++) {
-                        missiles.get(m).update();
                         if (missiles.get(m).intersects(spaceShip)) {
                             intersectsM = m;
                             dead = true;
-                        } else if (missiles.get(m).intersects(aliens.get(i)) && count > 80) {
+                        } else if (missiles.get(m).intersects(aliens.get(i)) && countM > 30) {
                             alienDead = true;
                             intersect = i;
                             intersectsM = m;
