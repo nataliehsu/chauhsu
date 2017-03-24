@@ -15,8 +15,8 @@ public class Main extends JPanel{
     private ArrayList<Aliens> aliens;
     private ArrayList<Missile> missiles;
     private Spaceship spaceShip;
-    private int count, maxCount, countM, maxM, lives, kills;
-    private boolean dead;
+    private int count, maxCount, countM, maxM, lives, kills, intersect, intersectsM;
+    private boolean dead, alienDead;
 
     public Main() {
         setSize(FRAMEWIDTH, FRAMEHEIGHT);
@@ -31,6 +31,7 @@ public class Main extends JPanel{
         lives = 3;
         kills = 0;
         dead = false;
+        alienDead = false;
 
         timer = new Timer(40, new ActionListener() {
             @Override
@@ -49,25 +50,31 @@ public class Main extends JPanel{
                     missiles.add(new Missile(s.getLoc().x, s.getLoc().y, 90, theWorld, spaceShip));
                     countM = 0;
                 }
-                for (Aliens s: aliens) {
-                    for (Missile m : missiles) {
-                        m.update();
-                        if(m.intersects(spaceShip)){
+                for (int m = 0; m < missiles.size(); m++) {
+                    for (int i = 0; i < aliens.size(); i++) {
+                        missiles.get(m).update();
+                        if (missiles.get(m).intersects(spaceShip)) {
+                            intersectsM = m;
                             dead = true;
-                        }
-                        else if(m.intersects(s)){
-                            dead = true;
-                            kills++;
-                            theWorld.removeSprite(s);
-                            dead = false;
+                        } else if (missiles.get(m).intersects(aliens.get(i)) && count > 50) {
+                            alienDead = true;
+                            intersect = i;
+                            intersectsM = m;
                         }
                     }
                 }
                 if(dead){
-                    dead = false;
                     lives--;
                     Point p = new Point(100, 100);
                     spaceShip.setLoc(p);
+                    missiles.remove(intersectsM);
+                    dead = false;
+                }
+                if(alienDead){
+                    kills++;
+                    aliens.remove(intersect);
+                    missiles.remove(intersectsM);
+                    alienDead = false;
                 }
                 repaint();
             }
@@ -79,7 +86,6 @@ public class Main extends JPanel{
             public void keyTyped(KeyEvent keyEvent) {
                 int code = keyEvent.getKeyChar();
                 if(code == 'r'){
-                    System.out.println(" ");
                 }
             }
 
