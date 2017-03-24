@@ -16,6 +16,7 @@ public class Main extends JPanel{
     private ArrayList<Missile> missiles;
     private Spaceship spaceShip;
     private int count, maxCount, countM, maxM, lives, kills;
+    private boolean dead;
 
     public Main() {
         setSize(FRAMEWIDTH, FRAMEHEIGHT);
@@ -29,6 +30,7 @@ public class Main extends JPanel{
         spaceShip = new Spaceship(100, 100, 90, theWorld);
         lives = 3;
         kills = 0;
+        dead = false;
 
         timer = new Timer(40, new ActionListener() {
             @Override
@@ -51,15 +53,21 @@ public class Main extends JPanel{
                     for (Missile m : missiles) {
                         m.update();
                         if(m.intersects(spaceShip)){
-                            lives--;
-                            Point p = new Point(100, 100);
-                            spaceShip.setLoc(p);
+                            dead = true;
                         }
                         else if(m.intersects(s)){
+                            dead = true;
                             kills++;
                             theWorld.removeSprite(s);
+                            dead = false;
                         }
                     }
+                }
+                if(dead){
+                    dead = false;
+                    lives--;
+                    Point p = new Point(100, 100);
+                    spaceShip.setLoc(p);
                 }
                 repaint();
             }
@@ -109,6 +117,7 @@ public class Main extends JPanel{
             m.draw(g2);
         }
         spaceShip.draw(g2);
+
         g2.setColor(Color.BLACK);
         g2.fillRect(10, 0, 150, 60);
         g2.setColor(Color.WHITE);
