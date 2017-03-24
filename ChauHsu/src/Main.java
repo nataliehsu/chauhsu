@@ -49,7 +49,6 @@ public class Main extends JPanel{
                 }
                 for (Aliens s: aliens) {
                     for (Missile m : missiles) {
-                        s.update();
                         m.update();
                         if(m.intersects(spaceShip)){
                             lives--;
