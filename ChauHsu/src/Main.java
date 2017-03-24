@@ -21,7 +21,7 @@ public class Main extends JPanel{
     public Main() {
         setSize(FRAMEWIDTH, FRAMEHEIGHT);
         theWorld = new World(FRAMEWIDTH, FRAMEHEIGHT);
-        count = 0;
+        count = 0 + 0;
         maxCount = 100;
         countM = 0;
         maxM = 50;
