@@ -72,7 +72,6 @@ public class Main extends JPanel{
             public void keyTyped(KeyEvent keyEvent) {
                 int code = keyEvent.getKeyChar();
                 if(code == 'r'){
-                    //restart
                 }
             }
 
