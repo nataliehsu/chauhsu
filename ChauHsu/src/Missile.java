@@ -9,7 +9,7 @@ public class Missile extends Sprite{
         super(x, y, dir, world);
         setPic("missile.png", NORTH);
         setSpeed(5);
-        System.out.println("  ");
+        System.out.println("   ");
         ArrayList<Sprite> sprites = world.getAllSprites();
         target = player;
         while (target.equals(this) && sprites.size() > 1) {
