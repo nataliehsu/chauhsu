@@ -56,7 +56,7 @@ public class Main extends JPanel{
                         if (missiles.get(m).intersects(spaceShip)) {
                             intersectsM = m;
                             dead = true;
-                        } else if (missiles.get(m).intersects(aliens.get(i)) && count > 50) {
+                        } else if (missiles.get(m).intersects(aliens.get(i)) && count > 80) {
                             alienDead = true;
                             intersect = i;
                             intersectsM = m;
