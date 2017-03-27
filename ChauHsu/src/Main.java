@@ -21,7 +21,7 @@ public class Main extends JPanel{
     public Main() {
         setSize(FRAMEWIDTH, FRAMEHEIGHT);
         theWorld = new World(FRAMEWIDTH, FRAMEHEIGHT);
-        count = 0 + 0;
+        count = 0;
         maxCount = 100;
         countM = 0;
         maxM = 50;
@@ -131,6 +131,24 @@ public class Main extends JPanel{
         g2.drawString("KILLS: " + kills, 20, 20);
         g2.setFont(new Font("Courier", Font.PLAIN, 20));
         g2.drawString("LIVES: " + lives, 20, 40);
+
+        if(lives == 0){
+        }
+
+    }
+
+    public void die(){
+        count = 0;
+        maxCount = 100;
+        countM = 0;
+        maxM = 50;
+        spaceShip = new Spaceship(100, 100, 90, theWorld);
+        lives = 3;
+        kills = 0;
+        dead = false;
+        alienDead = false;
+        aliens.clear();
+        missiles.clear();
 
     }
 
