@@ -37,8 +37,8 @@ public class Main extends JPanel{
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 count++;
-                int randX = (int)(Math.random()*(FRAMEWIDTH - 100)) + 50;
-                int randY = (int)(Math.random()*(FRAMEHEIGHT - 100)) + 50;
+                int randX = (int)(Math.random()*(FRAMEWIDTH - 300)) + 150;
+                int randY = (int)(Math.random()*(FRAMEHEIGHT - 300)) + 150;
                 if(count >= maxCount){
                     aliens.add(new Aliens(randX, randY, 90, theWorld));
                     count = 0;
@@ -140,6 +140,7 @@ public class Main extends JPanel{
             g2.drawString("GAME OVER", 200, 300);
             g2.setFont(new Font("Courier", Font.PLAIN, 70));
             g2.drawString("PRESS [r] TO RESTART", 85, 400);
+            timer.stop();
         }
 
     }
@@ -154,6 +155,7 @@ public class Main extends JPanel{
         kills = 0;
         dead = false;
         alienDead = false;
+        timer.restart();
         aliens.clear();
         missiles.clear();
 
