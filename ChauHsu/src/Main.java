@@ -137,6 +137,8 @@ public class Main extends JPanel{
             g2.setColor(Color.WHITE);
             g2.setFont(new Font("Courier", Font.PLAIN, 100));
             g2.drawString("GAME OVER", 200, 300);
+            g2.setFont(new Font("Courier", Font.PLAIN, 70));
+            g2.drawString("PRESS [R] TO RESTART", 85, 400);
         }
 
     }
