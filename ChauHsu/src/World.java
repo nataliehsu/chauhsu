@@ -121,8 +121,8 @@ public class World {
 
     public void setBackground(String fileName){
         try{
-            background = ImageIO.read(new File("res/" + fileName));
-            background = (BufferedImage)background.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+            background = ImageIO.read(new File("chauhsu/res/" + fileName));
+//            background = (BufferedImage)(background.getScaledInstance(width, height, Image.SCALE_SMOOTH));
         }catch(Exception e){e.printStackTrace();}
     }
 

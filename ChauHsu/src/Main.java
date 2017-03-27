@@ -117,6 +117,8 @@ public class Main extends JPanel{
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
+        theWorld.setBackground("bg.png");
+        theWorld.drawSprites(g2);
         for (Aliens s: aliens){
             s.draw(g2);
         }
