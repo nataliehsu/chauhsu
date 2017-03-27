@@ -139,9 +139,6 @@ public class Main extends JPanel{
             g2.drawString("GAME OVER", 200, 300);
         }
 
-        if(lives == 0){
-        }
-
     }
 
     public void die(){
