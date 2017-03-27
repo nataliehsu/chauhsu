@@ -139,6 +139,24 @@ public class Main extends JPanel{
             g2.drawString("GAME OVER", 200, 300);
         }
 
+        if(lives == 0){
+        }
+
+    }
+
+    public void die(){
+        count = 0;
+        maxCount = 100;
+        countM = 0;
+        maxM = 50;
+        spaceShip = new Spaceship(100, 100, 90, theWorld);
+        lives = 3;
+        kills = 0;
+        dead = false;
+        alienDead = false;
+        aliens.clear();
+        missiles.clear();
+
     }
 
     public static void main(String[] args) {
