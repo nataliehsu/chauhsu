@@ -86,6 +86,7 @@ public class Main extends JPanel{
             public void keyTyped(KeyEvent keyEvent) {
                 int code = keyEvent.getKeyChar();
                 if(code == 'r'){
+                    restart();
                 }
             }
 
@@ -141,7 +142,7 @@ public class Main extends JPanel{
 
     }
 
-    public void die(){
+    public void restart(){
         count = 0;
         maxCount = 100;
         countM = 0;
