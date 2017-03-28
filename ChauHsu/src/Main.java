@@ -15,7 +15,7 @@ public class Main extends JPanel{
     private ArrayList<Aliens> aliens;
     private ArrayList<Missile> missiles;
     private Spaceship spaceShip;
-    private int count, maxCount, countM, maxM, lives, kills, intersect, intersectsM;
+    private int count, maxCount, countM, maxM, lives, kills, intersect, intersectsM, level;
     private boolean dead, alienDead;
 
     public Main() {
@@ -32,6 +32,7 @@ public class Main extends JPanel{
         kills = 0;
         dead = false;
         alienDead = false;
+        level = 1;
 
         timer = new Timer(40, new ActionListener() {
             @Override
@@ -75,6 +76,12 @@ public class Main extends JPanel{
                     aliens.remove(intersect);
                     missiles.remove(intersectsM);
                     alienDead = false;
+                }
+                if(kills == 10){
+                    for (int i = 0; i < missiles.size(); i++) {
+                        missiles.get(i).setSpeed(8);
+                    }
+                    level++;
                 }
                 repaint();
             }
@@ -134,6 +141,7 @@ public class Main extends JPanel{
         g2.drawString("KILLS: " + kills, 20, 20);
         g2.setFont(new Font("Courier", Font.PLAIN, 20));
         g2.drawString("LIVES: " + lives, 20, 40);
+        g2.drawString("LEVEL: " + level, 20, 60);
         if(lives == 0){
             g2.setColor(Color.BLACK);
             g2.fillRect(0, 0, getWidth(), getHeight());
