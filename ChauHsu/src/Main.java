@@ -43,6 +43,7 @@ public class Main extends JPanel{
                 if(count >= maxCount){
                     aliens.add(new Aliens(randX, randY, 90, theWorld));
                     count = 0;
+                    countM = 0;
                 }
                 countM++;
                 if(countM >= maxM && aliens.size() > 0){
@@ -77,7 +78,7 @@ public class Main extends JPanel{
                     missiles.remove(intersectsM);
                     alienDead = false;
                 }
-                if(kills == 10){
+                if(kills == 10 && level == 1){
                     for (int i = 0; i < missiles.size(); i++) {
                         missiles.get(i).setSpeed(8);
                     }
