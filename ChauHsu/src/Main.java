@@ -50,7 +50,12 @@ public class Main extends JPanel{
                 if(countM >= maxM && aliens.size() > 0){
                     int i = (int)(Math.random() * aliens.size());
                     Sprite s = aliens.get(i);
-                    missiles.add(new Missile(s.getLoc().x, s.getLoc().y, 90, theWorld, spaceShip));
+                    Missile m = new Missile(s.getLoc().x, s.getLoc().y, 90, theWorld, spaceShip);
+                    missiles.add(m);
+                    originalSpeed += 1;
+                    m.setSpeed(originalSpeed);
+
+
                     countM = 0;
                 }
                 for (int m = 0; m < missiles.size(); m++) {
@@ -59,7 +64,7 @@ public class Main extends JPanel{
                         if (missiles.get(m).intersects(spaceShip)) {
                             intersectsM = m;
                             dead = true;
-                        } else if (missiles.get(m).intersects(aliens.get(i)) && countM > 30) {
+                        } else if (missiles.get(m).intersects(aliens.get(i)) && countM > 11) {
                             alienDead = true;
                             intersect = i;
                             intersectsM = m;
@@ -79,11 +84,14 @@ public class Main extends JPanel{
                     missiles.remove(intersectsM);
                     alienDead = false;
                 }
-                if(aliens.size() == 0){
+                if(aliens.size() == 0 && kills > 0){
                     level++;
-                    originalSpeed = originalSpeed + 3;
-                    for (int i = 0; i < missiles.size(); i++) {
-                        missiles.get(i).setSpeed(originalSpeed);
+                    count = 100;
+                    if(maxCount - 20 > 20) {
+                        maxCount -= 20;
+                    }
+                    if(maxM - 10 > 10) {
+                        maxM -= 10;
                     }
                 }
                 repaint();
@@ -166,6 +174,8 @@ public class Main extends JPanel{
         spaceShip = new Spaceship(100, 100, 90, theWorld);
         lives = 3;
         kills = 0;
+        level = 0;
+        originalSpeed = 5;
         dead = false;
         alienDead = false;
         timer.restart();
