@@ -15,7 +15,7 @@ public class Main extends JPanel{
     private ArrayList<Aliens> aliens;
     private ArrayList<Missile> missiles;
     private Spaceship spaceShip;
-    private int count, maxCount, countM, maxM, lives, kills, intersect, intersectsM, level;
+    private int count, maxCount, countM, maxM, lives, kills, intersect, intersectsM, level, originalSpeed;
     private boolean dead, alienDead;
 
     public Main() {
@@ -33,6 +33,7 @@ public class Main extends JPanel{
         dead = false;
         alienDead = false;
         level = 1;
+        originalSpeed = 5;
 
         timer = new Timer(40, new ActionListener() {
             @Override
@@ -72,17 +73,18 @@ public class Main extends JPanel{
                     missiles.remove(intersectsM);
                     dead = false;
                 }
-                if(alienDead){
+                if(alienDead) {
                     kills++;
                     aliens.remove(intersect);
                     missiles.remove(intersectsM);
                     alienDead = false;
                 }
-                if(kills == 10 && level == 1){
-                    for (int i = 0; i < missiles.size(); i++) {
-                        missiles.get(i).setSpeed(8);
-                    }
+                if(aliens.size() == 0){
                     level++;
+                    originalSpeed = originalSpeed + 3;
+                    for (int i = 0; i < missiles.size(); i++) {
+                        missiles.get(i).setSpeed(originalSpeed);
+                    }
                 }
                 repaint();
             }
