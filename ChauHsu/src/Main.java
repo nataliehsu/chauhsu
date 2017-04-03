@@ -52,9 +52,18 @@ public class Main extends JPanel{
                     Sprite s = aliens.get(i);
                     Missile m = new Missile(s.getLoc().x, s.getLoc().y, 90, theWorld, spaceShip);
                     missiles.add(m);
-                    originalSpeed += 1;
+                    if(level > 1) {
+                        originalSpeed += level;
+                    }
+                    if(level >= 10){
+                        int i1 = (int)(Math.random() * aliens.size());
+                        Sprite s1 = aliens.get(i1);
+                        Missile m1 = new Missile(s1.getLoc().x, s1.getLoc().y, 90, theWorld, spaceShip);
+                        missiles.add(m1);
+                        m1.setSpeed(originalSpeed);
+                    }
                     m.setSpeed(originalSpeed);
-
+                    originalSpeed = 5;
 
                     countM = 0;
                 }
@@ -64,7 +73,7 @@ public class Main extends JPanel{
                         if (missiles.get(m).intersects(spaceShip)) {
                             intersectsM = m;
                             dead = true;
-                        } else if (missiles.get(m).intersects(aliens.get(i)) && countM > 11) {
+                        } else if (missiles.get(m).intersects(aliens.get(i)) && countM > 12) {
                             alienDead = true;
                             intersect = i;
                             intersectsM = m;
@@ -87,10 +96,10 @@ public class Main extends JPanel{
                 if(aliens.size() == 0 && kills > 0){
                     level++;
                     count = 100;
-                    if(maxCount - 20 > 20) {
+                    if(maxCount - 25 > 0) {
                         maxCount -= 20;
                     }
-                    if(maxM - 10 > 10) {
+                    if(maxM - 20 >= 10) {
                         maxM -= 10;
                     }
                 }
@@ -161,6 +170,11 @@ public class Main extends JPanel{
             g2.drawString("GAME OVER", 200, 300);
             g2.setFont(new Font("Courier", Font.PLAIN, 70));
             g2.drawString("PRESS [r] TO RESTART", 85, 400);
+            g2.setFont(new Font("Courier", Font.PLAIN, 20));
+            g2.drawString("KILLS: " + kills, 20, 20);
+            g2.setFont(new Font("Courier", Font.PLAIN, 20));
+            g2.drawString("LIVES: " + lives, 20, 40);
+            g2.drawString("LEVEL: " + level, 20, 60);
             timer.stop();
         }
 
