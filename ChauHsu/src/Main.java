@@ -97,10 +97,10 @@ public class Main extends JPanel{
                     level++;
                     count = 100;
                     if(maxCount - 25 > 0) {
-                        maxCount -= 20;
+                        maxCount -= 25;
                     }
                     if(maxM - 20 >= 10) {
-                        maxM -= 10;
+                        maxM -= 20;
                     }
                 }
                 repaint();
