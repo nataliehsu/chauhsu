@@ -5,5 +5,6 @@ public class Med extends Sprite{
     public Med(int x, int y, int dir){
         super(x, y, dir);
         setPic("med.png", NORTH);
+        setSpeed(15);
     }
 }

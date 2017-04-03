@@ -14,9 +14,10 @@ public class Main extends JPanel{
     private boolean[] keys;
     private ArrayList<Aliens> aliens;
     private ArrayList<Missile> missiles;
+    private ArrayList<Med> firstAid;
     private Spaceship spaceShip;
     private int count, maxCount, countM, maxM, lives, kills, intersect, intersectsM, level, originalSpeed;
-    private boolean dead, alienDead;
+    private boolean dead, alienDead, life;
 
     public Main() {
         setSize(FRAMEWIDTH, FRAMEHEIGHT);
@@ -32,6 +33,7 @@ public class Main extends JPanel{
         kills = 0;
         dead = false;
         alienDead = false;
+        life = false;
         level = 1;
         originalSpeed = 5;
 
@@ -96,12 +98,24 @@ public class Main extends JPanel{
                 if(aliens.size() == 0 && kills > 0){
                     level++;
                     count = 100;
-                    if(maxCount - 25 > 0) {
-                        maxCount -= 25;
+                    if(maxCount - 20 >= 20) {
+                        maxCount -= 20;
                     }
                     if(maxM - 20 >= 10) {
                         maxM -= 20;
                     }
+                    Med m = new Med(0, randY, 0);
+                    firstAid.add(m);
+                }
+                for(Med med: firstAid){
+                    med.update();
+                    if(med.intersects(spaceShip)){
+                        life = true;
+                    }
+                }
+                if(life){
+                    lives++;
+                    life = false;
                 }
                 repaint();
             }
@@ -151,6 +165,9 @@ public class Main extends JPanel{
         }
         for(Missile m: missiles){
             m.draw(g2);
+        }
+        for(Med med: firstAid){
+            med.draw(g2);
         }
         spaceShip.draw(g2);
 
