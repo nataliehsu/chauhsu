@@ -16,7 +16,7 @@ public class Main extends JPanel{
     private ArrayList<Missile> missiles;
     private ArrayList<Med> firstAid;
     private Spaceship spaceShip;
-    private int count, maxCount, countM, maxM, lives, kills, intersect, intersectsM, level, originalSpeed;
+    private int count, maxCount, countM, maxM, lives, kills, intersect, intersectsM, level, originalSpeed, intersectMed, selfKillPrevent;
     private boolean dead, alienDead, life;
 
     public Main() {
@@ -28,6 +28,7 @@ public class Main extends JPanel{
         maxM = 50;
         aliens = new ArrayList<Aliens>();
         missiles = new ArrayList<Missile>();
+        firstAid = new ArrayList<Med>();
         spaceShip = new Spaceship(100, 100, 90, theWorld);
         lives = 3;
         kills = 0;
@@ -36,6 +37,7 @@ public class Main extends JPanel{
         life = false;
         level = 1;
         originalSpeed = 5;
+        selfKillPrevent = 10;
 
         timer = new Timer(40, new ActionListener() {
             @Override
@@ -75,7 +77,7 @@ public class Main extends JPanel{
                         if (missiles.get(m).intersects(spaceShip)) {
                             intersectsM = m;
                             dead = true;
-                        } else if (missiles.get(m).intersects(aliens.get(i)) && countM > 12) {
+                        } else if (missiles.get(m).intersects(aliens.get(i)) && countM > selfKillPrevent) {
                             alienDead = true;
                             intersect = i;
                             intersectsM = m;
@@ -104,18 +106,24 @@ public class Main extends JPanel{
                     if(maxM - 20 >= 10) {
                         maxM -= 20;
                     }
-                    Med m = new Med(0, randY, 0);
+                    missiles.clear();
+                    Med m = new Med(randX, 0, 270);
                     firstAid.add(m);
                 }
-                for(Med med: firstAid){
-                    med.update();
-                    if(med.intersects(spaceShip)){
+                if(level > 2){
+                    selfKillPrevent = 8;
+                }
+                for (int i = 0; i < firstAid.size(); i++) {
+                    firstAid.get(i).update();
+                    if(firstAid.get(i).intersects(spaceShip)){
                         life = true;
+                        intersectMed = i;
                     }
                 }
                 if(life){
                     lives++;
                     life = false;
+                    firstAid.remove(intersectMed);
                 }
                 repaint();
             }
