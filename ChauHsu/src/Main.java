@@ -37,7 +37,7 @@ public class Main extends JPanel{
         life = false;
         level = 1;
         originalSpeed = 5;
-        selfKillPrevent = 10;
+        selfKillPrevent = 20;
 
         timer = new Timer(40, new ActionListener() {
             @Override
@@ -60,11 +60,7 @@ public class Main extends JPanel{
                         originalSpeed += level;
                     }
                     if(level >= 10){
-                        int i1 = (int)(Math.random() * aliens.size());
-                        Sprite s1 = aliens.get(i1);
-                        Missile m1 = new Missile(s1.getLoc().x, s1.getLoc().y, 90, theWorld, spaceShip);
-                        missiles.add(m1);
-                        m1.setSpeed(originalSpeed);
+                        countM = 5;
                     }
                     m.setSpeed(originalSpeed);
                     originalSpeed = 5;
