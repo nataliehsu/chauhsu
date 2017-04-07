@@ -206,13 +206,20 @@ public class Main extends JPanel{
         maxCount = 100;
         countM = 0;
         maxM = 50;
-        spaceShip = new Spaceship(100, 100, 90, theWorld);
+        if(lives == 0) {
+            spaceShip = new Spaceship(100, 100, 90, theWorld);
+        }
+        selfKillPrevent = 20;
         lives = 3;
         kills = 0;
         level = 0;
         originalSpeed = 5;
         dead = false;
         alienDead = false;
+        life = false;
+        level = 1;
+        originalSpeed = 5;
+        selfKillPrevent = 20;
         timer.restart();
         aliens.clear();
         missiles.clear();
