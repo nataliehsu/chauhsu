@@ -82,8 +82,6 @@ public class Main extends JPanel{
                 }
                 if(dead){
                     lives--;
-                    Point p = new Point(100, 100);
-                    spaceShip.setLoc(p);
                     missiles.remove(intersectsM);
                     dead = false;
                 }
